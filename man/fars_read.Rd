@@ -20,7 +20,10 @@ data frame.  If \code{filename} does not exist then nothing is returned, or assi
 no error or warning is generated.
 }
 \examples{
-fars_read(inputfile)
+
+\dontrun{
+#' fars_read(inputfile)
 fars_read("another.csv")
+}
 
 }

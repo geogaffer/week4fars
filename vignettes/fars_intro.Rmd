@@ -19,3 +19,33 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(fars)
 ```
+
+fars is a small and simple collection of functions to assist in accessing historical data on road accidents. 
+Data is compiled annually from state sources and made accessible... somewhere as a single national data source for the year.  Naming of the data files is standardized.  A helper function is provided that generates the standard file name when provided with a specific year.
+
+Three years (2013, 2014 and 2015) have been provided as data in this package and additional years can be added by the user.  The following code demonstrates how to access the package data.
+
+```{r}
+file2013 <- make_filename(2013)
+print(file2013)
+
+path1 <-system.file("extdata", file2013, package = "fars")
+print(path1)
+```
+
+The data can then be loaded into a dataframe for further work.  In the follwoing code daya for 2013 is loaded and the dimensions examined to confirm the size of the data
+
+```{r}
+data2013 <- fars_read(system.file("extdata", file2013, package = "fars"))
+dim(data2013)
+```
+
+Although three years as provided with this package, some functions assume that the data files are in the working directory and the following code moves 203 data into that directory.  Following that one state is selected (the one coded as 10) and the `fars_map_state()` function is used to quickly visualize the location of accidents during that year.
+
+```{r}
+file.copy(path1, ".")
+fars_map_state(10, 2013)
+```
+
+This concludes a very brief example of how easily data included in the fars package can be loaded or visualized.
+
